@@ -1,6 +1,7 @@
 # Enhancing Electricity Price Forecasting Accuracy with Detection-Informed Hybrid Model
 
 ## Overview
+
 Welcome to the GitHub repository for our project on improving electricity price forecasting using a detection-informed hybrid model. This project combines Gated Recurrent Units (GRU) and eXtreme Gradient Boosting (XGBoost) to create a robust model capable of handling complex, time-varying data patterns and concept drift, which are common challenges in the energy sector.
 
 ## Table of Contents
@@ -10,14 +11,13 @@ Welcome to the GitHub repository for our project on improving electricity price 
 3. [Installation](#installation)
 4. [Usage](#usage)
 5. [Data Collection](#data-collection)
-6. [Model Training](#model-training)
+6. [Model Training and Evaluation](#model-training-and-evaluation)
 7. [Results](#results)
 8. [Concept Drift Detection](#concept-drift-detection)
-9. [Retraining Strategy](#retraining-strategy)
-10. [Ethical Considerations](#ethical-considerations)
-11. [Future Enhancements](#future-enhancements)
-12. [Contributing](#contributing)
-13. [License](#license)
+9. [Ethical Considerations](#ethical-considerations)
+10. [Future Enhancements](#future-enhancements)
+11. [Contributing](#contributing)
+12. [License](#license)
 
 ## Introduction
 
@@ -26,10 +26,7 @@ This project addresses the critical challenge of forecasting electricity prices 
 ## Project Structure
 
 - `data/`: Directory containing the datasets used in the project.
-- `notebooks/`: Jupyter notebooks for data preprocessing, model training, and analysis.
-- `scripts/`: Python scripts for running the model and performing tasks.
-- `models/`: Directory for saving trained models.
-- `results/`: Directory for storing results and visualizations.
+- `notebooks/`: Jupyter notebooks, including `conceptDriftResults4.ipynb` for running the model and obtaining results.
 - `README.md`: Project documentation.
 - `LICENSE`: License for the project.
 
@@ -38,7 +35,7 @@ This project addresses the critical challenge of forecasting electricity prices 
 ### Prerequisites
 
 - Python 3.7 or higher
-- Virtual environment (optional but recommended)
+- Jupyter Notebook
 
 ### Steps
 
@@ -68,29 +65,30 @@ This project addresses the critical challenge of forecasting electricity prices 
 
 ## Usage
 
-### Running the Model
+### Running the Model using Jupyter Notebook
 
-1. **Preprocess the data:**
-
-    ```bash
-    python scripts/preprocess_data.py
-    ```
-
-2. **Train the model:**
+1. **Start Jupyter Notebook:**
 
     ```bash
-    python scripts/train_model.py
+    jupyter notebook
     ```
 
-3. **Evaluate the model:**
+2. **Open the Notebook:**
 
-    ```bash
-    python scripts/evaluate_model.py
-    ```
+    - Navigate to the `notebooks/` directory and open `conceptDriftResults4.ipynb`.
 
-### Notebook Exploration
+3. **Run the Notebook:**
 
-- Explore the Jupyter notebooks in the `notebooks/` directory to see step-by-step data analysis and model training processes.
+    - Execute the cells in `conceptDriftResults4.ipynb` sequentially. The notebook includes data preprocessing, model training, evaluation, and results visualization.
+
+    - Make sure the dataset is in the appropriate format and placed in the `data/` directory as specified in the notebook.
+
+### Notebook Features
+
+- **Data Preprocessing:** Cleans and normalizes data for training.
+- **Model Training:** Trains the hybrid GRU-XGBoost model.
+- **Evaluation:** Evaluates model performance and visualizes results.
+- **Concept Drift Detection:** Includes steps for detecting and handling concept drift.
 
 ## Data Collection
 
@@ -100,7 +98,7 @@ The data used in this project includes hourly electricity prices from Spanish ci
 - **Weather Data:** [OpenWeatherMap](https://openweathermap.org/)
 - **Energy Data:** [ENTSOE](https://www.entsoe.eu/)
 
-## Model Training
+## Model Training and Evaluation
 
 ### Hybrid Model
 
@@ -110,8 +108,8 @@ The data used in this project includes hourly electricity prices from Spanish ci
 ### Training Process
 
 1. Preprocess the data by normalizing and feature engineering.
-2. Train the GRU model to capture time-series patterns.
-3. Use XGBoost to correct errors from the GRU model.
+2. Train the GRU model to learn patterns in the time-series data.
+3. Use XGBoost to correct any errors made by the GRU model.
 4. Combine the outputs to form the final hybrid model.
 
 ## Results
@@ -122,7 +120,7 @@ The data used in this project includes hourly electricity prices from Spanish ci
 - **RMSE (Root Mean Squared Error):** Improved from 0.025 to 0.020.
 - **R² Value:** Increased from 0.85 to 0.89.
 
-The results demonstrate significant improvements in forecasting accuracy, showcasing the hybrid model's effectiveness.
+These metrics demonstrate significant improvements in forecasting accuracy, showcasing the hybrid model's effectiveness.
 
 ## Concept Drift Detection
 
@@ -132,13 +130,6 @@ Concept drift, or changes in data patterns over time, is detected using:
 - **Wasserstein Distance:** Measures the magnitude of distributional changes.
 
 These methods ensure the model remains accurate and relevant as data evolves.
-
-## Retraining Strategy
-
-The model uses a windowing technique for retraining to maintain high performance:
-
-- **Window Size:** Data is retrained using a small window of recent data to quickly adapt to changes.
-- **Efficiency:** Ensures the model stays responsive without high computational costs.
 
 ## Ethical Considerations
 
