@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the GitHub repository for our project on improving electricity price forecasting using a detection-informed hybrid model. This project combines Gated Recurrent Units (GRU) and eXtreme Gradient Boosting (XGBoost) to create a robust model capable of handling complex, time-varying data patterns and concept drift, which are common challenges in the energy sector.
+Welcome to the GitHub repository for our project on improving electricity price forecasting using a detection-informed hybrid model. This project combines Gated Recurrent Units (GRU) and eXtreme Gradient Boosting (XGBoost) to create a robust model capable of handling complex, time-varying data patterns and concept drift, which are common challenges in the energy sector. Upon detecting concept drift, the model is designed to retrain itself to adapt to the new data patterns and maintain forecasting accuracy.
 
 ## Table of Contents
 
@@ -13,7 +13,7 @@ Welcome to the GitHub repository for our project on improving electricity price 
 5. [Data Collection](#data-collection)
 6. [Model Training and Evaluation](#model-training-and-evaluation)
 7. [Results](#results)
-8. [Concept Drift Detection](#concept-drift-detection)
+8. [Concept Drift Detection and Retraining](#concept-drift-detection-and-retraining)
 9. [Ethical Considerations](#ethical-considerations)
 10. [Future Enhancements](#future-enhancements)
 11. [Contributing](#contributing)
@@ -21,7 +21,7 @@ Welcome to the GitHub repository for our project on improving electricity price 
 
 ## Introduction
 
-This project addresses the critical challenge of forecasting electricity prices amidst the growing integration of renewable energy sources, which introduces variability and unpredictability. Traditional forecasting methods often fall short due to these complexities. Our approach involves a novel hybrid model that enhances forecasting accuracy and adapts to changes in data patterns, known as concept drift.
+This project addresses the critical challenge of forecasting electricity prices amidst the growing integration of renewable energy sources, which introduces variability and unpredictability. Traditional forecasting methods often fall short due to these complexities. Our approach involves a novel hybrid model that enhances forecasting accuracy and adapts to changes in data patterns, known as concept drift. When concept drift is detected, the model undergoes retraining to adapt to the new data patterns, ensuring continuous high accuracy.
 
 ## Project Structure
 
@@ -79,7 +79,7 @@ This project addresses the critical challenge of forecasting electricity prices 
 
 3. **Run the Notebook:**
 
-    - Execute the cells in `conceptDriftResults4.ipynb` sequentially. The notebook includes data preprocessing, model training, evaluation, and results visualization.
+    - Execute the cells in `conceptDriftResults4.ipynb` sequentially. The notebook includes data preprocessing, model training, evaluation, and results visualization. It also demonstrates the process of detecting concept drift and retraining the model to adapt to new data patterns.
 
     - Make sure the dataset is in the appropriate format and placed in the `data/` directory as specified in the notebook.
 
@@ -88,7 +88,7 @@ This project addresses the critical challenge of forecasting electricity prices 
 - **Data Preprocessing:** Cleans and normalizes data for training.
 - **Model Training:** Trains the hybrid GRU-XGBoost model.
 - **Evaluation:** Evaluates model performance and visualizes results.
-- **Concept Drift Detection:** Includes steps for detecting and handling concept drift.
+- **Concept Drift Detection and Retraining:** Includes steps for detecting and handling concept drift, followed by retraining the model to adapt to new data patterns.
 
 ## Data Collection
 
@@ -111,6 +111,7 @@ The data used in this project includes hourly electricity prices from Spanish ci
 2. Train the GRU model to learn patterns in the time-series data.
 3. Use XGBoost to correct any errors made by the GRU model.
 4. Combine the outputs to form the final hybrid model.
+5. Implement a retraining strategy to ensure the model adapts to new data patterns when concept drift is detected.
 
 ## Results
 
@@ -122,14 +123,23 @@ The data used in this project includes hourly electricity prices from Spanish ci
 
 These metrics demonstrate significant improvements in forecasting accuracy, showcasing the hybrid model's effectiveness.
 
-## Concept Drift Detection
+## Concept Drift Detection and Retraining
 
-Concept drift, or changes in data patterns over time, is detected using:
+### Concept Drift Detection
 
-- **Kolmogorov-Smirnov (KS) Test:** Identifies changes in distribution.
-- **Wasserstein Distance:** Measures the magnitude of distributional changes.
+Concept drift refers to the change in the underlying data distribution over time, which can affect model performance. This project uses:
 
-These methods ensure the model remains accurate and relevant as data evolves.
+- **Kolmogorov-Smirnov (KS) Test:** To identify changes in distribution.
+- **Wasserstein Distance:** To measure the magnitude of distributional changes.
+
+### Retraining on Drift Detection
+
+Upon detecting concept drift, the model undergoes a retraining process to adapt to the new data patterns. This involves:
+
+- **Windowing Technique:** Using a fixed-size window of the most recent data to retrain the model periodically, ensuring the model remains responsive to the latest data trends.
+- **Retraining:** Updating the GRU and XGBoost components of the hybrid model with new data to maintain accuracy and relevance.
+
+This process ensures that the model continues to provide accurate forecasts even as the data evolves over time.
 
 ## Ethical Considerations
 
@@ -143,10 +153,10 @@ These methods ensure the model remains accurate and relevant as data evolves.
 - **Advanced Concept Drift Techniques:** Exploring more sophisticated methods for detecting changes in data patterns.
 - **Real-Time Forecasting System:** Developing a system for immediate application in grid management.
 
-## Contributing
+<!-- ## Contributing
 
 Contributions are welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for more details on how to get involved.
-
+  -->
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
